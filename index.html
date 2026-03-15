@@ -1,0 +1,58 @@
+<html lang="en">
+    <head>
+        <title>Rollcall App v2</title>
+        <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href=",/icons/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16x16.png">
+        <link rel="manifest" href="/site.webmanifest">
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <main>
+            <nav>
+                <h1>Service Attendance</h1>
+            </nav>
+
+            <section class="form-section">
+                <div class="form-el">
+                <form>
+
+                <label for="name-el">FullName:</label>
+                <input placeholder="Daniel David" type="text"
+                id="name-el"
+                pattern="^[A-Za-z\s]{2,30}$"
+                title="Please enter only letters and spaces (2-30 characters)."
+                required>
+
+                <label for="num-el">Phone Number:</label>
+                <input placeholder="0123456789" type="number"
+                id="num-el"
+                pattern="[0-9]{10}"
+                title="Please enter a 10-digit phone number."
+                required>
+
+                <label for="loc-el">Location:</label>
+                <input placeholder="Lapaz" type="text"
+                id="loc-el"
+                pattern="[A-Za-z\s]{2,30}"
+                title="Please enter only letters and spaces (2-30 characters)."
+                required>
+
+                <div class="button-container">
+                    <button type="submit" id="input-btn">SAVE INPUT</button>
+                    <button type="button" class="delete-btn" disabled>DELETE</button>
+                </div>
+                
+                </form>
+                </div>
+                </section>
+
+                <section class="list-section">
+                    <ul id="ul-el">
+                    </ul>
+                </section>
+        </main>
+        <script type="module" src="index.js"></script>
+    </body>
+</html>
