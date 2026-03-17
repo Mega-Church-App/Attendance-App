@@ -60,8 +60,9 @@ deleteBtn.addEventListener("dblclick", function() {
 
 function showToast() {
     toast.classList.add("show")
+
+    toast.textContent = `Welcome to DestinyLine ${userName}!`
     
-    // Slide it out after 3 seconds
     setTimeout(() => {
         toast.classList.remove("show")
     }, 3000)
@@ -70,13 +71,13 @@ function showToast() {
 submitBtn.addEventListener("click", function(event) {
     event.preventDefault()
     let rollcallInfo = `${name.value} - ${number.value} ${location.value}`
-    const nameVal = name.value;
+    const nameVal = name.value.trim();
     const numberVal = number.value;
     const locationVal = location.value;
     if (nameVal && numberVal && locationVal) {
         push(referenceInDb, rollcallInfo)
 
-        showToast()
+        showToast(nameVal)
         
         name.value = ""
         number.value = ""
