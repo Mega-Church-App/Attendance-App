@@ -26,7 +26,7 @@ const location = document.getElementById("loc-el")
 const submitBtn = document.getElementById("input-btn")
 const deleteBtn = document.querySelector(".delete-btn")
 const ulEl = document.getElementById("ul-el")
-const referenceInDb = ref(database, "generic")
+const referenceInDb = ref(database, "attendees")
 const toast = document.getElementById("notification-toast")
 
 function render(leads) {
@@ -60,7 +60,7 @@ deleteBtn.addEventListener("dblclick", function() {
 function showToast(userName) {
     toast.classList.add("show")
 
-    toast.textContent = `Welcome to DestinyLine, ${userName}!`
+    toast.innerHTML = `Welcome to <span>DestinyLine</span>, ${userName}🎉!`
     
     setTimeout(() => {
         toast.classList.remove("show")

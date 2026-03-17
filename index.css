@@ -27,6 +27,11 @@ body {
 .toast.show {
     transform: translateX(-50%) translateY(0);
 }
+
+span {
+    color: gold;
+}
+
 nav {
     background-color: black;
     color: gold;
