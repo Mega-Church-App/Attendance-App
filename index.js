@@ -60,7 +60,7 @@ deleteBtn.addEventListener("dblclick", function() {
 function showToast(userName) {
     toast.classList.add("show")
 
-    toast.textContent = `Welcome to DestinyLine ${userName}!`
+    toast.textContent = `Welcome to DestinyLine, ${userName}!`
     
     setTimeout(() => {
         toast.classList.remove("show")
