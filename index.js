@@ -54,7 +54,7 @@ onValue(referenceInDb, function(snapshot) {
 
 deleteBtn.addEventListener("dblclick", function() {
     remove(referenceInDb)
-    ulEl.innerHTML =""
+    ulEl.innerHTML =""  
 })
 
 function showToast(userName) {
