@@ -17,6 +17,9 @@ body {
     font-weight: bold;
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     z-index: 1000;
+    white-space: nowrap; 
+    min-width: 200px;
+    text-align: center;
     transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
