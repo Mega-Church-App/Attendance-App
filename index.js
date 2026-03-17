@@ -28,6 +28,7 @@ const submitBtn = document.getElementById("input-btn")
 const deleteBtn = document.querySelector(".delete-btn")
 const ulEl = document.getElementById("ul-el")
 const referenceInDb = ref(database, "generic")
+const toast = document.getElementById("notification-toast")
 
 function render(leads) {
     let listItems = ""
@@ -57,6 +58,15 @@ deleteBtn.addEventListener("dblclick", function() {
     ulEl.innerHTML =""
 })
 
+function showToast() {
+    toast.classList.add("show")
+    
+    // Slide it out after 3 seconds
+    setTimeout(() => {
+        toast.classList.remove("show")
+    }, 3000)
+}
+
 submitBtn.addEventListener("click", function(event) {
     event.preventDefault()
     let rollcallInfo = `${name.value} - ${number.value} ${location.value}`
@@ -64,7 +74,10 @@ submitBtn.addEventListener("click", function(event) {
     const numberVal = number.value;
     const locationVal = location.value;
     if (nameVal && numberVal && locationVal) {
-        push(referenceInDb, rollcallInfo)    
+        push(referenceInDb, rollcallInfo)
+
+        showToast()
+        
         name.value = ""
         number.value = ""
         location.value = ""
