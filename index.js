@@ -58,7 +58,7 @@ deleteBtn.addEventListener("dblclick", function() {
     ulEl.innerHTML =""
 })
 
-function showToast() {
+function showToast(userName) {
     toast.classList.add("show")
 
     toast.textContent = `Welcome to DestinyLine ${userName}!`
