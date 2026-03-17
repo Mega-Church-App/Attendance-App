@@ -5,6 +5,7 @@ body {
     background-color: #f4f4f4;
 }
 
+/* Nav Bar */
 .toast {
     position: fixed;
     top: 0;
@@ -26,8 +27,6 @@ body {
 .toast.show {
     transform: translateX(-50%) translateY(0);
 }
-
-/* Navigation Bar */
 nav {
     background-color: black;
     color: gold;
