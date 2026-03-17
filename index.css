@@ -5,6 +5,25 @@ body {
     background-color: #f4f4f4;
 }
 
+.toast {
+    position: fixed;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    background-color: #5f9341;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 0 0 8px 8px;
+    font-weight: bold;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1000;
+    transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
 /* Navigation Bar */
 nav {
     background-color: black;
