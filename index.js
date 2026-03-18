@@ -25,22 +25,30 @@ const number = document.getElementById("num-el")
 const location = document.getElementById("loc-el")
 const submitBtn = document.getElementById("input-btn")
 const deleteBtn = document.querySelector(".delete-btn")
-const ulEl = document.getElementById("ul-el")
+const tableBody = document.getElementById("table-body")
 const referenceInDb = ref(database, "attendees")
 const toast = document.getElementById("notification-toast")
 
 function render(leads) {
     let listItems = ""
-    for (let i = 0, length = leads.length; i < length; i++) {
+    for (let i = 0; i < leads.length; i++) {
+        
+        const parts = leads[i].split(" - ")
+        const namePart = parts[0] || ""
+        const detailsPart = parts[1] || ""
+        
+        const numberPart = detailsPart.split(" (")[0] || ""
+        const locationPart = detailsPart.includes("(") ? detailsPart.split("(")[1].replace(")", "") : ""
+
         listItems += `
-            <li>
-                <div class="list-cards">
-                    ${leads[i]}
-                </div>
-            </li>
+            <tr>
+                <td>${namePart}</td>
+                <td>${numberPart}</td>
+                <td>${locationPart}</td>
+            </tr>
         `
     }
-    ulEl.innerHTML = listItems
+    tableBody.innerHTML = listItems
 }
 
 onValue(referenceInDb, function(snapshot) {
