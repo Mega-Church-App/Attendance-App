@@ -32,22 +32,14 @@ const toast = document.getElementById("notification-toast")
 function render(leads) {
     let listItems = ""
     for (let i = 0; i < leads.length; i++) {
-        const fullString = leads[i];
+        // leads[i] is now an object: {fullName: "...", phone: "...", location: "..."}
+        const entry = leads[i]
         
-        const nameSplit = fullString.split(" - ");
-        const namePart = nameSplit[0] || "N/A";
-        const rest = nameSplit[1] || "";
-
-        const detailsSplit = rest.split(" (");
-        const numberPart = detailsSplit[0] || "N/A";
-        
-        const locationPart = detailsSplit[1] ? detailsSplit[1].replace(")", "") : "N/A";
-
         listItems += `
             <tr>
-                <td><strong>${namePart}</strong></td>
-                <td>${numberPart}</td>
-                <td>${locationPart}</td>
+                <td><strong>${entry.fullName || "N/A"}</strong></td>
+                <td>${entry.phone || "N/A"}</td>
+                <td>${entry.location || "N/A"}</td>
             </tr>
         `
     }
