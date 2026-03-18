@@ -28,6 +28,7 @@ const deleteBtn = document.querySelector(".delete-btn")
 const tableBody = document.getElementById("table-body")
 const referenceInDb = ref(database, "attendees")
 const toast = document.getElementById("notification-toast")
+const countEl = document.getElementById("count-el")
 
 function render(leads) {
     let listItems = ""
@@ -47,12 +48,24 @@ function render(leads) {
 }
 
 onValue(referenceInDb, function(snapshot) {
-    const snapshotDoesExist = snapshot.exists(); 
-    if (snapshotDoesExist){const snapshotValues = (snapshot.val())
-    const leads = Object.values(snapshotValues)
-    render(leads)
-}
-    
+    if (snapshot.exists()) {
+        const snapshotValues = snapshot.val()
+        const entries = Object.values(snapshotValues)
+        
+        // Update the live counter
+        countEl.textContent = entries.length
+        
+        // Re-enable the delete button if there's data
+        deleteBtn.disabled = false
+        
+        // Call your table render function
+        render(entries)
+    } else {
+        // Reset everything if the database is empty
+        countEl.textContent = "0"
+        tableBody.innerHTML = ""
+        deleteBtn.disabled = true
+    }
 })
 
 deleteBtn.addEventListener("dblclick", function() {
