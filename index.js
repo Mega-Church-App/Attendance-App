@@ -64,7 +64,7 @@ onValue(referenceInDb, function(snapshot) {
         // Reset everything if the database is empty
         countEl.textContent = "0"
         tableBody.innerHTML = ""
-        deleteBtn.disabled = true
+        deleteBtn.disabled = false
     }
 })
 
