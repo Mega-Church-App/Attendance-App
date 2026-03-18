@@ -80,18 +80,21 @@ function showToast(userName) {
 
 submitBtn.addEventListener("click", function(event) {
     event.preventDefault()
-    let rollcallInfo = `${name.value} - ${number.value} ${location.value}`
-    const nameVal = name.value.trim();
-    const numberVal = number.value;
-    const locationVal = location.value;
-    if (nameVal && numberVal && locationVal) {
-        push(referenceInDb, rollcallInfo)
+    
+    const nameVal = name.value.trim()
+    const numberVal = number.value.trim()
+    const locationVal = location.value.trim()
 
-        showToast(nameVal)
+    if (nameVal && numberVal && locationVal) {
+        push(referenceInDb, {
+            fullName: nameVal,
+            phone: numberVal,
+            location: locationVal
+        })
         
+        showToast(nameVal)
         name.value = ""
         number.value = ""
         location.value = ""
     }
-    console.log("clicked")
 })
