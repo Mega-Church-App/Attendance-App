@@ -117,33 +117,27 @@ input {
     cursor: not-allowed;
 }
 
-/* 3. Recorded Data Grid (3 side-by-side) */
-ul {
+table {
+    width: 90%;
+    max-width: 800px;
     margin: 30px auto;
-    padding: 0;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    max-width: 1000px;
-    gap: 15px;
-}
-
-li {
-    flex: 0 1 calc(33.33% - 20px); 
-    min-width: 250px;
-}
-
-.list-cards {
-    color: #333;
-    background: #ffffff;
-    border-left: 5px solid #5f9341;
-    border-radius: 4px;
-    padding: 15px;
+    border-collapse: collapse;
+    background: white;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
 }
 
-.list-cards:hover {
-    color: purple;
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f8f8f8;
+    color: #333;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
 }
