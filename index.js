@@ -33,7 +33,6 @@ const countEl = document.getElementById("count-el")
 function render(leads) {
     let listItems = ""
     for (let i = 0; i < leads.length; i++) {
-        // leads[i] is now an object: {fullName: "...", phone: "...", location: "..."}
         const entry = leads[i]
         
         listItems += `
@@ -52,16 +51,12 @@ onValue(referenceInDb, function(snapshot) {
         const snapshotValues = snapshot.val()
         const entries = Object.values(snapshotValues)
         
-        // Update the live counter
         countEl.textContent = entries.length
         
-        // Re-enable the delete button if there's data
         deleteBtn.disabled = false
         
-        // Call your table render function
         render(entries)
     } else {
-        // Reset everything if the database is empty
         countEl.textContent = "0"
         tableBody.innerHTML = ""
         deleteBtn.disabled = true
