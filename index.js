@@ -20,13 +20,17 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 let myLeads = []
+
 const name = document.getElementById("name-el")
 const number = document.getElementById("num-el")
 const location = document.getElementById("loc-el")
-const submitBtn = document.getElementById("input-btn")
+
+const formEl = document.querySelector("form")
 const deleteBtn = document.querySelector(".delete-btn")
+
 const tableBody = document.getElementById("table-body")
 const referenceInDb = ref(database, "attendees")
+
 const toast = document.getElementById("notification-toast")
 const countEl = document.getElementById("count-el")
 
@@ -50,13 +54,14 @@ onValue(referenceInDb, function(snapshot) {
     if (snapshot.exists()) {
         const snapshotValues = snapshot.val()
         const entries = Object.values(snapshotValues)
-        
+        myLeads = entries
+
         countEl.textContent = entries.length
-        
-        deleteBtn.disabled = false
+        deleteBtn.disabled = true
         
         render(entries)
     } else {
+        myLeads = []
         countEl.textContent = "0"
         tableBody.innerHTML = ""
         deleteBtn.disabled = true
@@ -78,7 +83,7 @@ function showToast(userName) {
     }, 3000)
 }
 
-submitBtn.addEventListener("click", function(event) {
+formEl.addEventListener("submit", function(event) {
     event.preventDefault()
     
     const nameVal = name.value.trim()
