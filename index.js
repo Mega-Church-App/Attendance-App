@@ -89,7 +89,12 @@ formEl.addEventListener("submit", function(event) {
     const nameVal = name.value.trim()
     const numberVal = number.value.trim()
     const locationVal = location.value.trim()
+    const isDuplicate = myLeads.some(lead => lead.phone === numberVal)
 
+    if (isDuplicate) {
+        alert("This phone number has already been registered!")
+        return 
+        }
     if (nameVal && numberVal && locationVal) {
         push(referenceInDb, {
             fullName: nameVal,
