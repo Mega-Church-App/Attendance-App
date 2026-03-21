@@ -70,7 +70,7 @@ onValue(referenceInDb, function(snapshot) {
 
 deleteBtn.addEventListener("dblclick", function() {
     remove(referenceInDb)
-    ulEl.innerHTML =""  
+    tableBody.innerHTML =""  
 })
 
 function showToast(userName) {
@@ -99,7 +99,8 @@ formEl.addEventListener("submit", function(event) {
         push(referenceInDb, {
             fullName: nameVal,
             phone: numberVal,
-            location: locationVal
+            location: locationVal,
+            timestamp: new Date().toISOString()
         })
         
         showToast(nameVal)
