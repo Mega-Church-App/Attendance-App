@@ -110,7 +110,8 @@ formEl.addEventListener("submit", function(event) {
             isFirstTimer: false
         })
         showToast(`Welcome to <span>DestinyLine</span>, ${userName}🎉!`)
-    }else{
+    }
+    else{
         push(referenceInDb, {
             fullName: nameVal,
             phone: numberVal,
@@ -124,5 +125,7 @@ formEl.addEventListener("submit", function(event) {
         nameEl.value = ""
         numberEl.value = ""
         locationEl.value = ""
+    }
+})
     }
 })
