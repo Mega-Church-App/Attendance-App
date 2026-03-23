@@ -3,7 +3,8 @@ import { getDatabase,
     ref,
     push,
     onValue,
-    remove } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
+    get,
+    set } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-database.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyDBbohkO6Zzvw-3V4d_L6RDkV_-CXZMNOU",
@@ -21,14 +22,13 @@ const database = getDatabase(app);
 
 let myLeads = []
 
-const name = document.getElementById("name-el")
-const number = document.getElementById("num-el")
-const location = document.getElementById("loc-el")
+const nameEl = document.getElementById("name-el")
+const numberEl = document.getElementById("num-el")
+const locationEl = document.getElementById("loc-el")
 
 const formEl = document.querySelector("form")
-const deleteBtn = document.querySelector(".delete-btn")
-
 const tableBody = document.getElementById("table-body")
+
 const referenceInDb = ref(database, "attendees")
 
 const toast = document.getElementById("notification-toast")
@@ -38,7 +38,7 @@ function render(leads) {
     let listItems = ""
     for (let i = 0; i < leads.length; i++) {
         const entry = leads[i]
-        
+
         listItems += `
             <tr>
                 <td><strong>${entry.fullName || "N/A"}</strong></td>
@@ -68,11 +68,6 @@ onValue(referenceInDb, function(snapshot) {
     }
 })
 
-deleteBtn.addEventListener("dblclick", function() {
-    remove(referenceInDb)
-    tableBody.innerHTML =""  
-})
-
 function showToast(userName) {
     toast.classList.add("show")
 
@@ -86,9 +81,9 @@ function showToast(userName) {
 formEl.addEventListener("submit", function(event) {
     event.preventDefault()
     
-    const nameVal = name.value.trim()
-    const numberVal = number.value.trim()
-    const locationVal = location.value.trim()
+    const nameVal = nameEl.value.trim()
+    const numberVal = numberEl.value.trim()
+    const locationVal = locationEl.value.trim()
     const isDuplicate = myLeads.some(lead => lead.phone === numberVal)
 
     if (isDuplicate) {
@@ -104,8 +99,8 @@ formEl.addEventListener("submit", function(event) {
         })
         
         showToast(nameVal)
-        name.value = ""
-        number.value = ""
-        location.value = ""
+        nameEl.value = ""
+        numberEl.value = ""
+        locationEl.value = ""
     }
 })
