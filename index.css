@@ -25,6 +25,26 @@ body {
     transition: transform 0.4s cubic-bezier(0.18, 0.89, 0.32, 1.28);
 }
 
+.toast.error {
+    background-color: #d9534f;
+    color: white;
+}
+
+.toast.flashy {
+    background-color: gold;
+    color: black;
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+    border: 2px solid #daa520;
+}
+.toast.flashy span {
+    color: black;
+}
+
+.first-timer-row {
+    background-color: #fff8dc !important; 
+    border-left: 4px solid gold;
+}
+
 #count-el {
     padding: 2px 10px;
     border-radius: 20px;
