@@ -74,7 +74,7 @@ function showToast(message, isError = false, isFirstTimer = false) {
 
     if (isError) {
         toast.classList.add("error")
-    } else {
+    } else if (isFirstTimer) {
         toast.classList.add("flashy")
     }
 
@@ -126,6 +126,6 @@ formEl.addEventListener("submit", function(event) {
     nameEl.value = ""
     numberEl.value = ""
     locationEl.value = ""
-})
+        })
     }
 })
