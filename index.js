@@ -39,8 +39,10 @@ function render(leads) {
     for (let i = 0; i < leads.length; i++) {
         const entry = leads[i]
 
+        const rowClass = entry.isFirstTimer ? "first-timer-row" : ""
+
         listItems += `
-            <tr>
+            <tr class="${rowClass}>
                 <td><strong>${entry.fullName || "N/A"}</strong></td>
                 <td>${entry.phone || "N/A"}</td>
                 <td>${entry.location || "N/A"}</td>
@@ -56,23 +58,27 @@ onValue(referenceInDb, function(snapshot) {
         const entries = Object.values(snapshotValues)
         myLeads = entries
 
-        countEl.textContent = entries.length
-        deleteBtn.disabled = true
-        
+        countEl.textContent = entries.length        
         render(entries)
     } else {
         myLeads = []
         countEl.textContent = "0"
         tableBody.innerHTML = ""
-        deleteBtn.disabled = true
     }
 })
 
-function showToast(userName) {
-    toast.classList.add("show")
+function showToast(message, isError = false, isFirstTimer = false) {
+    toast.innerHTML = message
 
-    toast.innerHTML = `Welcome to <span>DestinyLine</span>, ${userName}🎉!`
-    
+    toast.classList.add("error", "flashy")
+
+    if (isError) {
+        toast.classList.add("error")
+    } else {
+        toast.classList.add("flashy")
+    }
+
+    toast.classList.add("show")
     setTimeout(() => {
         toast.classList.remove("show")
     }, 3000)
@@ -87,18 +93,34 @@ formEl.addEventListener("submit", function(event) {
     const isDuplicate = myLeads.some(lead => lead.phone === numberVal)
 
     if (isDuplicate) {
-        alert("This phone number has already been registered!")
+        showToast("This phone number has already checked in!", true)
         return 
         }
+
     if (nameVal && numberVal && locationVal) {
+        const memberRef = ref(database, `members/${numberVal}`)
+
+        get(memberRef).then((snapshot) => {
+            if (snapshot.exists()) {
         push(referenceInDb, {
             fullName: nameVal,
             phone: numberVal,
             location: locationVal,
-            timestamp: new Date().toISOString()
+            timestamp: new Date().toISOString(),
+            isFirstTimer: false
         })
-        
-        showToast(nameVal)
+        showToast(`Welcome to <span>DestinyLine</span>, ${userName}🎉!`)
+    }else{
+        push(referenceInDb, {
+            fullName: nameVal,
+            phone: numberVal,
+            location: locationVal,
+            timestamp: new Date().toISOString(),
+            isFirstTimer: true
+        })
+
+        set(memberRef, {isMember: true})
+        showToast(`🥳🙌🎉Welcome to <span>DestinyLine</span>, ${userName}🥳🙌🎉!`)
         nameEl.value = ""
         numberEl.value = ""
         locationEl.value = ""
