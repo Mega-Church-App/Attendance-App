@@ -42,7 +42,7 @@ function render(leads) {
         const rowClass = entry.isFirstTimer ? "first-timer-row" : ""
 
         listItems += `
-            <tr class="${rowClass}>
+            <tr class="${rowClass}">
                 <td><strong>${entry.fullName || "N/A"}</strong></td>
                 <td>${entry.phone || "N/A"}</td>
                 <td>${entry.location || "N/A"}</td>
@@ -70,7 +70,7 @@ onValue(referenceInDb, function(snapshot) {
 function showToast(message, isError = false, isFirstTimer = false) {
     toast.innerHTML = message
 
-    toast.classList.add("error", "flashy")
+    toast.classList.remove("error", "flashy")
 
     if (isError) {
         toast.classList.add("error")
@@ -109,7 +109,7 @@ formEl.addEventListener("submit", function(event) {
             timestamp: new Date().toISOString(),
             isFirstTimer: false
         })
-        showToast(`Welcome to <span>DestinyLine</span>, ${userName}🎉!`)
+        showToast(`Welcome to <span>DestinyLine</span>, ${nameVal}🎉!`)
     }
     else{
         push(referenceInDb, {
@@ -121,11 +121,11 @@ formEl.addEventListener("submit", function(event) {
         })
 
         set(memberRef, {isMember: true})
-        showToast(`🥳🙌🎉Welcome to <span>DestinyLine</span>, ${userName}🥳🙌🎉!`)
-        nameEl.value = ""
-        numberEl.value = ""
-        locationEl.value = ""
+        showToast(`🥳🙌🎉Welcome to <span>DestinyLine</span>, ${nameVal}🥳🙌🎉!`)
     }
+    nameEl.value = ""
+    numberEl.value = ""
+    locationEl.value = ""
 })
     }
 })
